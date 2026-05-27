@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const DB_PATH = path.resolve(__dirname, "data/db.json");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -581,6 +581,17 @@ app.post("/api/support", async (req, res) => {
   await writeDB(db);
 
   res.status(201).json({ success: true });
+});
+
+// Serve React static assets
+const distPath = path.resolve(__dirname, "../dist");
+app.use(express.static(distPath));
+
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+  res.sendFile(path.resolve(distPath, "index.html"));
 });
 
 // Start the server

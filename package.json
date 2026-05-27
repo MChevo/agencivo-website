@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "start": "node server/index.js",
     "server": "node server/index.js",
     "client": "vite --host 0.0.0.0",
     "dev": "concurrently \"node server/index.js\" \"vite --host 0.0.0.0\"",
