@@ -95,6 +95,13 @@ export const LoginModalContent = ({ onClose }) => {
       setSignupError("All fields are required.");
       return;
     }
+    
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!gmailRegex.test(signupEmail.trim().toLowerCase())) {
+      setSignupError("يجب التسجيل باستخدام حساب Gmail حقيقي (مثال: name@gmail.com).");
+      return;
+    }
+
     const res = await registerUser(signupEmail, signupPassword, signupAgencyName);
     if (res.success) {
       setSignupSuccess(true);

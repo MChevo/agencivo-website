@@ -112,9 +112,9 @@ app.post("/api/auth/register", async (req, res) => {
     return res.status(400).json({ error: "Missing required fields." });
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: "Invalid email format. Please use a real email address." });
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+  if (!gmailRegex.test(email.trim().toLowerCase())) {
+    return res.status(400).json({ error: "Only Gmail accounts are allowed (e.g. name@gmail.com)." });
   }
 
   const db = await readDB();
