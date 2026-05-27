@@ -18,7 +18,16 @@ app.use(express.json());
 async function readDB() {
   try {
     const data = await fs.readFile(DB_PATH, "utf-8");
-    return JSON.parse(data);
+    const db = JSON.parse(data);
+    
+    // Schema sanitization for backwards compatibility
+    if (!db.users) db.users = [];
+    if (!db.briefs) db.briefs = [];
+    if (!db.notifications) db.notifications = [];
+    if (!db.messages) db.messages = {};
+    if (!db.supportTickets) db.supportTickets = [];
+    
+    return db;
   } catch (error) {
     // If file doesn't exist, return default schema
     return {
@@ -587,7 +596,7 @@ app.post("/api/support", async (req, res) => {
 const distPath = path.resolve(__dirname, "../dist");
 app.use(express.static(distPath));
 
-app.get("*", (req, res, next) => {
+app.get("/{*splat}", (req, res, next) => {
   if (req.path.startsWith("/api")) {
     return next();
   }
