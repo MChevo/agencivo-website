@@ -37,9 +37,9 @@ export const SubmittedPage = () => {
     setLoading(false);
 
     if (success) {
-      setFeedbackSuccess("تم إرسال تقييمك بنجاح! شكراً لمساعدتنا في تحسين خدماتنا.");
+      setFeedbackSuccess("Feedback submitted successfully! Thank you for helping us improve.");
     } else {
-      alert("عذراً، فشل إرسال التقييم. يرجى المحاولة مرة أخرى.");
+      alert("Sorry, feedback submission failed. Please try again.");
     }
   };
 
@@ -73,10 +73,10 @@ export const SubmittedPage = () => {
   const activeStep = getStatusStep();
 
   const steps = [
-    { no: "01", label: "تم الإرسال", desc: "استلمنا تفاصيل مشروعك بنجاح.", key: "New" },
-    { no: "02", label: "قيد التنفيذ", desc: "يعمل فريقنا حالياً على التصميمات.", key: "In Progress" },
-    { no: "03", label: "المراجعة النهائية", desc: "التصميمات جاهزة بانتظار رأيك.", key: "Review" },
-    { no: "04", label: "اكتمل المشروع", desc: "تم تسليم الملفات النهائية بنجاح.", key: "Completed" }
+    { no: "01", label: "Submitted", desc: "We have successfully received your project details.", key: "New" },
+    { no: "02", label: "In Progress", desc: "Our team is currently working on the designs.", key: "In Progress" },
+    { no: "03", label: "Final Review", desc: "Designs are ready and awaiting your feedback.", key: "Review" },
+    { no: "04", label: "Completed", desc: "Final deliverables have been successfully delivered.", key: "Completed" }
   ];
 
   return (
@@ -95,16 +95,16 @@ export const SubmittedPage = () => {
         </div>
         
         <h1 className="mt-8 text-6xl font-black tracking-[-0.06em]">Client Portal</h1>
-        <p className="mt-4 text-xl text-neutral-700">تتبع حالة مشروعك والملفات الخاصة بك مباشرة.</p>
+        <p className="mt-4 text-xl text-neutral-700">Track your project status and deliverables in real time.</p>
         <p className="mt-3 text-sm text-neutral-600">
-          يمكنك مراجعة حالة التصميمات في الجدول أدناه، وبمجرد اكتمالها يمكنك تقييم الخدمة.
+          You can review the design pipeline status below, and vote on the service quality once it is completed.
         </p>
 
         {/* Live Status Tracker Progress Stepper */}
         <div className="mt-12 rounded-2xl border border-neutral-200 bg-white p-8 text-left shadow-xs">
           <h3 className="text-lg font-bold text-black mb-8 flex items-center gap-2">
             <span style={{ backgroundColor: "var(--brand-accent)" }} className="h-2 w-2 rounded-full" />
-            حالة خط الإنتاج الحالي (Live Project Pipeline)
+            Live Project Pipeline
           </h3>
           
           <div className="grid gap-6 md:grid-cols-4 relative">
@@ -144,9 +144,9 @@ export const SubmittedPage = () => {
             <div className="absolute top-0 right-0 -mt-10 -mr-10 h-32 w-32 bg-neutral-50 rounded-full opacity-50" />
             <h3 className="text-2xl font-black text-black mb-2 flex items-center gap-2">
               <Award style={{ color: "var(--brand-accent)" }} size={24} />
-              تقييم جودة المشروع (Project Voting & Feedback)
+              Project Voting & Feedback
             </h3>
-            <p className="text-xs text-neutral-500 mb-6">يسعدنا جداً معرفة رأيك حول مخرجات العمل وجودة التواصل لتطوير خدماتنا.</p>
+            <p className="text-xs text-neutral-500 mb-6">We would love to hear your feedback on the work quality and our communication to help us improve.</p>
 
             {feedbackSuccess ? (
               <div className="p-4 rounded-xl border border-green-200 bg-green-50 text-green-700 text-sm font-semibold flex items-center gap-2">
@@ -155,10 +155,10 @@ export const SubmittedPage = () => {
               </div>
             ) : currentBrief.feedback ? (
               <div className="p-6 rounded-xl border border-neutral-200 bg-neutral-50 space-y-4">
-                <p className="text-xs text-neutral-400 font-bold uppercase tracking-wider">تم استلام تقييمك بنجاح</p>
+                <p className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Your feedback has been received</p>
                 <div className="flex gap-8 text-sm font-semibold text-neutral-800">
                   <span className="flex items-center gap-1.5">
-                    راضي عن التصميمات: 
+                    Design Satisfaction: 
                     <span className="flex text-amber-500">
                       {Array.from({ length: currentBrief.feedback.designRating }).map((_, i) => (
                         <Star key={i} size={14} className="fill-amber-500 text-amber-500" />
@@ -166,7 +166,7 @@ export const SubmittedPage = () => {
                     </span>
                   </span>
                   <span className="flex items-center gap-1.5">
-                    راضي عن الخدمة والتواصل: 
+                    Service & Communication: 
                     <span className="flex text-amber-500">
                       {Array.from({ length: currentBrief.feedback.serviceRating }).map((_, i) => (
                         <Star key={i} size={14} className="fill-amber-500 text-amber-500" />
@@ -176,7 +176,7 @@ export const SubmittedPage = () => {
                 </div>
                 {currentBrief.feedback.comments && (
                   <p className="text-xs text-neutral-600 italic mt-2 border-t border-neutral-200 pt-3">
-                    ملاحظاتك: "{currentBrief.feedback.comments}"
+                    Your comments: "{currentBrief.feedback.comments}"
                   </p>
                 )}
               </div>
@@ -185,7 +185,7 @@ export const SubmittedPage = () => {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
                     <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600">
-                      راضي عن التصميمات؟ (Design Quality)
+                      Are you satisfied with the designs? (Design Quality)
                     </label>
                     <div className="flex gap-2.5">
                       {[1, 2, 3, 4, 5].map((stars) => (
@@ -207,7 +207,7 @@ export const SubmittedPage = () => {
 
                   <div className="space-y-2">
                     <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600">
-                      راضي عن الخدمة والتواصل؟ (Service & Communication)
+                      Are you satisfied with the service? (Service & Communication)
                     </label>
                     <div className="flex gap-2.5">
                       {[1, 2, 3, 4, 5].map((stars) => (
@@ -230,12 +230,12 @@ export const SubmittedPage = () => {
 
                 <div className="space-y-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600">
-                    ملاحظات أو تعليقات إضافية
+                    Additional Comments or Notes
                   </label>
                   <textarea
                     value={comments}
                     onChange={(e) => setComments(e.target.value)}
-                    placeholder="اكتب أي ملاحظات ترغب في مشاركتها مع الوكالة..."
+                    placeholder="Write any notes or feedback you would like to share with the agency..."
                     className="w-full rounded-xl border border-neutral-300 p-4 text-sm outline-none focus:border-black bg-white h-24 resize-none"
                   />
                 </div>
@@ -246,7 +246,7 @@ export const SubmittedPage = () => {
                   className="px-8 py-3.5 flex items-center justify-center gap-2"
                 >
                   <Check size={16} />
-                  {loading ? "جاري الإرسال..." : "إرسال التقييم"}
+                  {loading ? "Sending..." : "Submit Feedback"}
                 </Button>
               </form>
             )}

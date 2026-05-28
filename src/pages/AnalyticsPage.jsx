@@ -123,13 +123,13 @@ export const AnalyticsPage = () => {
         <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
           <h3 className="text-xl font-bold text-black mb-1 flex items-center gap-2">
             <Star style={{ color: "var(--brand-accent)", fill: "var(--brand-accent)" }} size={20} />
-            تفاصيل استطلاعات رأي العملاء (Client Feedbacks & Ratings)
+            Client Feedbacks & Ratings
           </h3>
-          <p className="text-xs text-neutral-500 mb-6">التقييمات الحقيقية المرسلة من لوحة تحكم العملاء بعد استلام أعمالهم.</p>
+          <p className="text-xs text-neutral-500 mb-6">Real ratings submitted by clients after receiving their project deliverables.</p>
           
           {briefsWithFeedback.length === 0 ? (
             <div className="text-center py-12 text-neutral-400 text-xs font-semibold">
-              لا توجد تقييمات مسجلة حتى الآن. سيظهر تصويت العملاء هنا بمجرد تقييمهم للمشاريع المكتملة.
+              No feedback recorded yet. Client votes will appear here once they rate completed projects.
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -144,7 +144,7 @@ export const AnalyticsPage = () => {
                   
                   <div className="space-y-1.5 text-xs font-semibold text-neutral-700">
                     <div className="flex justify-between">
-                      <span>راضي عن التصميمات:</span>
+                      <span>Design Satisfaction:</span>
                       <span className="flex text-amber-500">
                         {Array.from({ length: b.feedback.designRating }).map((_, i) => (
                           <Star key={i} size={12} className="fill-amber-500 text-amber-500" />
@@ -152,7 +152,7 @@ export const AnalyticsPage = () => {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>راضي عن الخدمة والتواصل:</span>
+                      <span>Service & Communication:</span>
                       <span className="flex text-amber-500">
                         {Array.from({ length: b.feedback.serviceRating }).map((_, i) => (
                           <Star key={i} size={12} className="fill-amber-500 text-amber-500" />

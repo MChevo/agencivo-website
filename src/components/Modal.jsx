@@ -98,7 +98,7 @@ export const LoginModalContent = ({ onClose }) => {
     
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     if (!gmailRegex.test(signupEmail.trim().toLowerCase())) {
-      setSignupError("يجب التسجيل باستخدام حساب Gmail حقيقي (مثال: name@gmail.com).");
+      setSignupError("You must register using a real Gmail account (e.g. name@gmail.com).");
       return;
     }
 

@@ -191,6 +191,18 @@ export const DashboardPage = () => {
   const unusedCount = briefs.filter((b) => b.status === "Code Unused").length;
   const unreadNotifCount = notifications.filter((n) => n.unread).length;
 
+  // Real satisfaction rate from client voting feedback
+  const submittedBriefs = briefs.filter((b) => !b.isCodeOnly);
+  const briefsWithFeedback = submittedBriefs.filter((b) => b.feedback);
+  let satisfactionIndex = 98.4; // Default baseline if no reviews
+  if (briefsWithFeedback.length > 0) {
+    const totalDesign = briefsWithFeedback.reduce((sum, b) => sum + b.feedback.designRating, 0);
+    const totalService = briefsWithFeedback.reduce((sum, b) => sum + b.feedback.serviceRating, 0);
+    const totalPossibleStars = briefsWithFeedback.length * 10;
+    const totalReceivedStars = totalDesign + totalService;
+    satisfactionIndex = Number(((totalReceivedStars / totalPossibleStars) * 100).toFixed(1));
+  }
+
   return (
     <div className="flex min-h-screen bg-[#fbfbfa] w-full">
       {/* Desktop Sidebar */}
@@ -442,7 +454,7 @@ export const DashboardPage = () => {
               </div>
               <div>
                 <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-wider">Satisfaction</p>
-                <b className="text-2xl font-black text-black">98%</b>
+                <b className="text-2xl font-black text-black">{Math.round(satisfactionIndex)}%</b>
               </div>
             </div>
             {/* SVG line chart representing activity */}
@@ -450,10 +462,10 @@ export const DashboardPage = () => {
               <polyline
                 points="0,90 35,82 70,60 105,72 140,50 175,45 210,28 245,42 280,54 315,67 350,50 385,42 420,14"
                 fill="none"
-                stroke="black"
+                stroke="var(--brand-accent)"
                 strokeWidth="4"
               />
-              <circle cx="420" cy="14" r="6" fill="black" />
+              <circle cx="420" cy="14" r="6" fill="var(--brand-accent)" />
             </svg>
             <Button variant="light" className="mt-4 w-full">
               View Analytics
